@@ -71,7 +71,7 @@ module Widgets
       concat tag('ul', {} , true)
 
       @_tabnav.tabs.each do |tab|
-        li_options = {}
+        li_options = tab.li_options # li_options get copied from tabs
         li_options[:id] = "#{tab.html[:id]}_container" if tab.html[:id]
 
         tab_html = tab.html.dup
@@ -103,6 +103,7 @@ module Widgets
         else
           raise "WHAT THE HELL?"
         end
+        concat tab.extras # Allows to add additional html into the tabnav bar
         concat "</li>\n"
       end
       concat '</ul>'
