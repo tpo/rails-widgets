@@ -18,7 +18,7 @@ module Widgets
       result << render_tooltip(name, tooltip_content(opts,&proc), opts)
       
       if block_given?
-        concat result 
+        concat result
         return nil
       else
         return result

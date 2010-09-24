@@ -23,10 +23,10 @@ module Widgets
         html << tag('div', options, true)
         html << capture(&block)
         html << '</div>'
-        concat html
+        concat html.html_safe
         nil # avoid duplication if called with <%= %>
       else
-        return html
+        return html.html_safe
       end
     end
 
@@ -45,7 +45,7 @@ module Widgets
       concat tag('div',@_tabnav.html ,true)
       @_tabnav.sort! if opts[:sort] == true
       render_tabnav_tabs
-      concat "</div>\n"
+      concat "</div>\n".html_safe
       nil
     end
 
@@ -71,7 +71,7 @@ module Widgets
       concat tag('ul', {} , true)
 
       @_tabnav.tabs.each do |tab|
-        li_options = tab.li_options # li_options get copied from tabs
+        li_options = {}
         li_options[:id] = "#{tab.html[:id]}_container" if tab.html[:id]
 
         tab_html = tab.html.dup
@@ -103,10 +103,9 @@ module Widgets
         else
           raise "WHAT THE HELL?"
         end
-        concat tab.extras # Allows to add additional html into the tabnav bar
-        concat "</li>\n"
+        concat "</li>\n".html_safe
       end
-      concat '</ul>'
+      concat '</ul>'.html_safe
     end
 
     # generate javascript function to use

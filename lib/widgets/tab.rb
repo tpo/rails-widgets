@@ -2,14 +2,12 @@ module Widgets
   class Tab
     include Highlightable
     include Disableable
-    attr_accessor :link, :remote_link, :name, :html, :li_options, :extras
+    attr_accessor :link, :remote_link, :name, :html
     
     def initialize(opts={})
       @name = opts[:name] 
       @link = opts[:link] || {}
       @remote_link = opts[:remote_link] || nil
-      @li_options = opts[:li_options] || {} # Extra attributes to be able to set float right
-      @extras = opts[:extras] || "" # Extra attribute to allow additional content in tabnav
       
       # wrap highlights into an array if only one hash has been passed
       opts[:highlights] = [opts[:highlights]] if opts[:highlights].kind_of?(Hash)
